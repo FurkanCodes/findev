@@ -9,6 +9,7 @@ type Props = {};
 function Header({}: Props) {
   const session = useSession();
   console.log(session);
+  ("sd");
   return (
     <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
       {session?.data ? (
