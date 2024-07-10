@@ -16,6 +16,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { createRoomAction } from "./actions";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({
   name: z.string().min(1).max(50),
@@ -26,7 +27,7 @@ const formSchema = z.object({
 
 export function CreateRoomForm() {
   const router = useRouter();
-
+  const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -39,8 +40,12 @@ export function CreateRoomForm() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const room = await createRoomAction(values);
-
-    router.push(`/rooms/${room.id}`);
+    toast({
+      title: "room created",
+      description: "Your room has been created",
+      variant: "success",
+    });
+    router.push(`/`);
   }
 
   return (
@@ -53,7 +58,7 @@ export function CreateRoomForm() {
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input {...field} placeholder="Dev Finder Is Awesome" />
+                <Input {...field} />
               </FormControl>
               <FormDescription>This is your public room name.</FormDescription>
               <FormMessage />
@@ -88,10 +93,7 @@ export function CreateRoomForm() {
             <FormItem>
               <FormLabel>Github Repo</FormLabel>
               <FormControl>
-                <Input
-                  {...field}
-                  placeholder="https://github.com/webdevcody/dev-finder"
-                />
+                <Input {...field} />
               </FormControl>
               <FormDescription>
                 Please put a link to the project you are working on
