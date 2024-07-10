@@ -43,7 +43,6 @@ export function CreateRoomForm() {
     toast({
       title: "room created",
       description: "Your room has been created",
-      variant: "success",
     });
     router.push(`/`);
   }
