@@ -1,5 +1,3 @@
-import { Room } from "@/db/schema";
-import React from "react";
 import {
   Card,
   CardContent,
@@ -8,9 +6,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import Link from "next/link";
+import { Room } from "@/db/schema";
+import { parseTags } from "@/utils/util";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
+import Link from "next/link";
 import { Button } from "../ui/button";
+import TagList from "../ui/tag-list";
 
 type Props = {};
 
@@ -21,10 +22,10 @@ const RoomCard = ({ room }: { room: Room }) => {
         <CardTitle>{room.name}</CardTitle>
         <CardDescription>{room.description}</CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex flex-col gap-4">
         {room.githubRepo ? (
           <Link
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 "
             target="_blank"
             rel="noreferrer"
             href={room?.githubRepo}
@@ -32,10 +33,11 @@ const RoomCard = ({ room }: { room: Room }) => {
             <GitHubLogoIcon></GitHubLogoIcon>Github Repo Link
           </Link>
         ) : null}
+        <TagList tags={parseTags(room?.tags)} />
       </CardContent>
       <CardFooter>
         <Button asChild>
-          <Link href={`/your-rooms/${room.id}`}>Join Room</Link>
+          <Link href={`/rooms/${room.id}`}>Join Room</Link>
         </Button>
       </CardFooter>
     </Card>

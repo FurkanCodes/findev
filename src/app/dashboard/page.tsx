@@ -1,11 +1,9 @@
 import RoomCard from "@/components/cards/RoomCard";
 import { Button } from "@/components/ui/button";
 
-import { db } from "@/db";
 import { getRooms } from "@/services/rooms";
 
 import Link from "next/link";
-import React from "react";
 
 const Dashboard = async () => {
   const rooms = await getRooms();
