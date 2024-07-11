@@ -20,7 +20,7 @@ const Dashboard = async () => {
       <div className="lg:grid lg:grid-cols-3  lg:gap-4 ">
         {rooms.map((room) => (
           <div className="mb-4 lg:mb-0 ">
-            <RoomCard room={room} key={room.id}></RoomCard>
+            <RoomCard room={room} key={room.id + "-card"}></RoomCard>
           </div>
         ))}
       </div>
