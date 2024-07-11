@@ -19,7 +19,7 @@ const Dashboard = async () => {
       </div>
       <div className="lg:grid lg:grid-cols-3  lg:gap-4 ">
         {rooms.map((room) => (
-          <div className="mb-4 lg:mb-0 ">
+          <div key={room.id + "-card"} className="mb-4 lg:mb-0 ">
             <RoomCard room={room} key={room.id + "-card"}></RoomCard>
           </div>
         ))}
