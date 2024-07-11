@@ -3,6 +3,7 @@ import { getRoom } from "@/services/rooms";
 import { parseTags } from "@/utils/util";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
+import { DevVideoPlayer } from "./video-player";
 
 async function RoomPage(props: { params: { roomId: string } }) {
   console.log("props", props);
@@ -17,7 +18,7 @@ async function RoomPage(props: { params: { roomId: string } }) {
     <div className="grid grid-cols-4 min-h-screen ">
       <div className="col-span-3  p-4 pr-0">
         <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-8">
-          VIDEO PLAYER
+          <DevVideoPlayer room={room!} />
         </div>
       </div>
       <div className="col-span-1  p-4 pl-2">
