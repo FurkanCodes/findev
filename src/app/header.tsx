@@ -114,8 +114,8 @@ export function Header() {
               <Link className="hover:underline" href="/your-rooms">
                 Your Rooms
               </Link>
-              <Link className="hover:underline" href="/create-room">
-                Create a Room
+              <Link className="hover:underline" href="/dashboard">
+                Dashboard
               </Link>
             </>
           )}
@@ -124,7 +124,10 @@ export function Header() {
         <div className="flex items-center gap-4">
           {isLoggedIn && <AccountDropdown />}
           {!isLoggedIn && (
-            <Button onClick={() => signIn()} variant="link">
+            <Button
+              onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
+              variant="link"
+            >
               <LogInIcon className="mr-2" /> Sign In
             </Button>
           )}
@@ -142,8 +145,8 @@ export function Header() {
               <Link className="hover:underline" href="/your-rooms">
                 Your Rooms
               </Link>
-              <Link className="hover:underline" href="/create-room">
-                Create a Room
+              <Link className="hover:underline" href="/dashboard">
+                Dashboard
               </Link>
             </>
           )}

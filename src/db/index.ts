@@ -1,10 +1,22 @@
 import { drizzle } from "drizzle-orm/postgres-js";
-import postgres from "postgres";
 import * as schema from "./schema";
+import postgres from "postgres";
+import type { PostgresJsDatabase } from "drizzle-orm/postgres-js";
 
-const connectionString = process.env.DB_URL!;
+declare global {
+  // eslint-disable-next-line no-var -- only var works here
+  var db: PostgresJsDatabase<typeof schema> | undefined;
+}
+let db: PostgresJsDatabase<typeof schema>;
 
-const client = postgres(connectionString);
-const db = drizzle(client, { schema });
+if (process.env.NODE_ENV === "production") {
+  db = drizzle(postgres(process.env.DB_URL!), { schema });
+} else {
+  if (!global.db) {
+    global.db = drizzle(postgres(process.env.DB_URL!), { schema });
+  }
+
+  db = global.db;
+}
 
 export { db };

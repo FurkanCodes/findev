@@ -44,7 +44,7 @@ export function CreateRoomForm() {
       title: "room created",
       description: "Your room has been created",
     });
-    router.push(`/`);
+    router.push(`/dashboard`);
   }
 
   return (
