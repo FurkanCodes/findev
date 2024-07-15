@@ -205,13 +205,13 @@ export function Header() {
             {isLoggedIn && (
               <>
                 <Link
-                  className="hover:text-opacity-100 transition text-opacity-60 text-black dark:text-white"
+                  className="hover:text-opacity-100 transition text-opacity-60 text-black dark:text-white dark:text-opacity-60 dark:hover:text-opacity-100"
                   href="/your-rooms"
                 >
                   Your Rooms
                 </Link>
                 <Link
-                  className="hover:text-opacity-100 text-opacity-60 transition text-black dark:text-white"
+                  className="hover:text-opacity-100 text-opacity-60 transition text-black dark:text-white dark:text-opacity-60 dark:hover:text-opacity-100"
                   href="/dashboard"
                 >
                   Dashboard
@@ -219,7 +219,7 @@ export function Header() {
               </>
             )}
             <Link
-              className="hover:text-opacity-100 text-opacity-60 transition text-black dark:text-white"
+              className="hover:text-opacity-100 text-opacity-60 transition text-black dark:text-white dark:text-opacity-60 dark:hover:text-opacity-100"
               href="/about"
             >
               About
