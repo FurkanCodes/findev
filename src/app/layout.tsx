@@ -31,7 +31,8 @@ export default function RootLayout({
           >
             <NextTopLoader />
             <Header />
-            {children}
+            <div className="container mx-auto">{children}</div>
+
             <Toaster />
           </ThemeProvider>
         </SessionProvider>

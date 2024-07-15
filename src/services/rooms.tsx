@@ -3,8 +3,6 @@ import { Room, room } from "@/db/schema";
 import { getSession } from "@/lib/auth";
 import { eq, like } from "drizzle-orm";
 
-import { unstable_noStore } from "next/cache";
-
 export async function createRoom(
   roomData: Omit<Room, "id" | "userId">,
   userId: string
