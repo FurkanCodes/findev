@@ -4,8 +4,10 @@ import { parseTags } from "@/utils/util";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { DevVideoPlayer } from "./video-player";
+import { unstable_noStore } from "next/cache";
 
 async function RoomPage(props: { params: { roomId: string } }) {
+  unstable_noStore();
   console.log("props", props);
   const roomId = props.params.roomId;
   const room = await getRoom(roomId);

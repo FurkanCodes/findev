@@ -107,10 +107,6 @@ export function Header() {
         <nav className="hidden md:flex gap-8">
           {isLoggedIn && (
             <>
-              <Link className="hover:underline" href="/browse">
-                Browse
-              </Link>
-
               <Link className="hover:underline" href="/your-rooms">
                 Your Rooms
               </Link>
@@ -138,10 +134,6 @@ export function Header() {
         <nav className="flex flex-col items-center gap-4">
           {isLoggedIn && (
             <>
-              <Link className="hover:underline" href="/browse">
-                Browse
-              </Link>
-
               <Link className="hover:underline" href="/your-rooms">
                 Your Rooms
               </Link>
