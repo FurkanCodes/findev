@@ -17,7 +17,7 @@ type Props = {};
 
 const RoomCard = ({ room }: { room: Room }) => {
   return (
-    <Card>
+    <Card className="w-[220px]">
       <CardHeader>
         <CardTitle>{room.name}</CardTitle>
         <CardDescription>{room.description}</CardDescription>

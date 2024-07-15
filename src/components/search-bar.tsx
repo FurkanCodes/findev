@@ -43,7 +43,7 @@ function SearchBar() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="flex gap-2">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="lg:flex gap-2">
         <FormField
           control={form.control}
           name="search"
@@ -51,7 +51,7 @@ function SearchBar() {
             <FormItem>
               <FormControl>
                 <Input
-                  className="w-[540px]"
+                  className="lg:w-[540px] w-[220px]"
                   placeholder="Filter rooms by its keywords"
                   {...field}
                 />

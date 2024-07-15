@@ -14,8 +14,8 @@ const Dashboard = async ({
   const rooms = await getRooms(searchParams.search);
 
   return (
-    <main className="min-h-screen justify-between px-24 py-12 ">
-      <div className="flex justify-between items-center mb-12 ">
+    <main className="lg:min-h-screen px-20 lg:px-24 mx-auto lg:py-12 ">
+      <div className="lg:flex justify-between items-center mb-12 mt-12 lg:mt-2 ">
         {" "}
         <h1 className="text-4xl">Dashboard</h1>
         <Button asChild>
