@@ -50,8 +50,8 @@ const AccordionItem = ({
 const Faq = (props: Props) => {
   return (
     <div className="bg-black bg-gradient-to-b from-[#5D2CA8] to-black pb-20 text-white">
-      <div className="container">
-        <h2 className="max-w-[648px]sm:text-6xl text-center text-5xl font-bold tracking-tighter">
+      <div className="container sm:py-24">
+        <h2 className="text-center text-5xl font-bold tracking-tighter sm:text-6xl">
           Frequently Asked Questions
         </h2>
         <div className="mx-auto mt-12 max-w-[648px]">

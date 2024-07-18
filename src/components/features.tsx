@@ -37,9 +37,9 @@ const features = [
 
 function Features() {
   return (
-    <div className="bg-black py-[72px] text-white sm:py-24">
+    <div className="bg-black py-[72px] text-white">
       <div className="container">
-        <h2 className="text-center text-5xl font-bold tracking-tighter">
+        <h2 className="text-center text-5xl font-bold tracking-tighter sm:text-6xl">
           Everthing you need
         </h2>
         <div className="mx-auto max-w-xl">
@@ -61,7 +61,6 @@ function Features() {
                 key={index}
                 className="rounded-xl border border-white/30 px-5 py-10 text-center sm:flex-1"
               >
-                <div> </div>
                 <span className="mx-auto inline-flex h-14 w-14 items-center justify-center rounded-lg border border-white/30 bg-white p-2 text-black">
                   {icon}
                 </span>

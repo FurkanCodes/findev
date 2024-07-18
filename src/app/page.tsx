@@ -1,5 +1,8 @@
+import CallToActions from '@/components/CallToActions'
+import Footer from '@/components/Footer'
 import Faq from '@/components/faq'
 import Features from '@/components/features'
+
 import Hero from '@/components/hero'
 import ProductShowcase from '@/components/product-showcase'
 import { CardContainer, CardBody, CardItem } from '@/components/ui/3d-card'
@@ -15,6 +18,8 @@ export default async function Home() {
       <Features />
       <ProductShowcase />
       <Faq />
+      <CallToActions />
+      <Footer />
     </main>
   )
 }
