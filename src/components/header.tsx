@@ -1,18 +1,18 @@
-"use client";
+'use client'
 
-import { ModeToggle } from "@/components/mode-toggle";
-import { Button } from "@/components/ui/button";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { ModeToggle } from '@/components/mode-toggle'
+import { Button } from '@/components/ui/button'
+import { signIn, signOut, useSession } from 'next-auth/react'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { DeleteIcon, LogInIcon, LogOutIcon, MenuIcon } from "lucide-react";
-import Image from "next/image";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import Link from "next/link";
+} from '@/components/ui/dropdown-menu'
+import { DeleteIcon, LogInIcon, LogOutIcon, MenuIcon } from 'lucide-react'
+import Image from 'next/image'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import Link from 'next/link'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -23,15 +23,15 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { useState } from "react";
-import { deleteAccountAction } from "../app/actions";
-import Logo from "../../public/findev.png";
-import DarkLogo from "../../public/darklogo.png";
+} from '@/components/ui/alert-dialog'
+import { useState } from 'react'
+import { deleteAccountAction } from '../app/actions'
+import Logo from '../../public/findev.png'
+import DarkLogo from '../../public/darklogo.png'
 
 function AccountDropdown() {
-  const session = useSession();
-  const [open, setOpen] = useState(false);
+  const session = useSession()
+  const [open, setOpen] = useState(false)
 
   return (
     <>
@@ -48,8 +48,8 @@ function AccountDropdown() {
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction
               onClick={async () => {
-                await deleteAccountAction();
-                signOut({ callbackUrl: "/" });
+                await deleteAccountAction()
+                signOut({ callbackUrl: '/' })
               }}
             >
               Yes, delete my account
@@ -60,9 +60,9 @@ function AccountDropdown() {
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant={"link"}>
+          <Button variant={'link'}>
             <Avatar className="mr-2">
-              <AvatarImage src={session.data?.user?.image ?? ""} />
+              <AvatarImage src={session.data?.user?.image ?? ''} />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
 
@@ -73,7 +73,7 @@ function AccountDropdown() {
           <DropdownMenuItem
             onClick={() =>
               signOut({
-                callbackUrl: "/",
+                callbackUrl: '/',
               })
             }
           >
@@ -82,7 +82,7 @@ function AccountDropdown() {
 
           <DropdownMenuItem
             onClick={() => {
-              setOpen(true);
+              setOpen(true)
             }}
           >
             <DeleteIcon className="mr-2" /> Delete Account
@@ -90,7 +90,7 @@ function AccountDropdown() {
         </DropdownMenuContent>
       </DropdownMenu>
     </>
-  );
+  )
 }
 
 function MenuIconDropdown({ isLoggedIn }: { isLoggedIn: boolean }) {
@@ -98,17 +98,17 @@ function MenuIconDropdown({ isLoggedIn }: { isLoggedIn: boolean }) {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant={"link"} className="text-white">
+          <Button variant={'link'} className="text-white">
             <MenuIcon className="text-black dark:text-white" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          <DropdownMenuItem className="flex flex-col gap-2 items-center">
+          <DropdownMenuItem className="flex flex-col items-center gap-2">
             {isLoggedIn ? (
               <>
                 <DropdownMenuItem>
                   <Link
-                    className="hover:text-opacity-100 transition text-opacity-60 text-black dark:text-white"
+                    className="text-black text-opacity-60 transition hover:text-opacity-100 dark:text-white"
                     href="/your-rooms"
                   >
                     Your Rooms
@@ -116,7 +116,7 @@ function MenuIconDropdown({ isLoggedIn }: { isLoggedIn: boolean }) {
                 </DropdownMenuItem>
                 <DropdownMenuItem>
                   <Link
-                    className="hover:text-opacity-100 transition text-opacity-60 text-black dark:text-white"
+                    className="text-black text-opacity-60 transition hover:text-opacity-100 dark:text-white"
                     href="/dashboard"
                   >
                     Dashboard
@@ -124,18 +124,18 @@ function MenuIconDropdown({ isLoggedIn }: { isLoggedIn: boolean }) {
                 </DropdownMenuItem>
                 <DropdownMenuItem>
                   <Link
-                    className="hover:text-opacity-100 transition text-opacity-60 text-black dark:text-white"
+                    className="text-black text-opacity-60 transition hover:text-opacity-100 dark:text-white"
                     href="/about"
                   >
                     About
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem className="hover:text-opacity-100 text-opacity-60 transition text-black dark:text-white">
+                <DropdownMenuItem className="text-black text-opacity-60 transition hover:text-opacity-100 dark:text-white">
                   <Button
-                    className="bg-white py-2 px-4 rounded-lg dark:text-black"
+                    className="rounded-lg bg-white px-4 py-2 dark:text-black"
                     onClick={() =>
                       signOut({
-                        callbackUrl: "/",
+                        callbackUrl: '/',
                       })
                     }
                     variant="link"
@@ -146,8 +146,8 @@ function MenuIconDropdown({ isLoggedIn }: { isLoggedIn: boolean }) {
               </>
             ) : (
               <Button
-                className="bg-white py-2 px-4 rounded-lg dark:text-black"
-                onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
+                className="rounded-lg bg-white px-4 py-2 dark:text-black"
+                onClick={() => signIn('google', { callbackUrl: '/dashboard' })}
                 variant="link"
               >
                 <LogInIcon className="mr-2" /> Sign In
@@ -157,28 +157,28 @@ function MenuIconDropdown({ isLoggedIn }: { isLoggedIn: boolean }) {
         </DropdownMenuContent>
       </DropdownMenu>
     </>
-  );
+  )
 }
 
 export function Header() {
-  const session = useSession();
-  const isLoggedIn = !!session.data;
+  const session = useSession()
+  const isLoggedIn = !!session.data
 
   return (
-    <header className="bg-gray-100 py-2 dark:bg-black z-10 relative">
-      <div className="container mx-auto flex justify-between items-center ">
+    <header className="relative z-10 bg-gray-100 py-2 dark:bg-black">
+      <div className="container mx-auto flex items-center justify-between">
         <Link href="/">
           <div className="relative">
-            <div className="absolute w-full top-2 bottom-0 bg-[linear-gradient(to_right,#F87BFF,#FB92CF,#FFDD9B,#C2F0B1,#2FD8FE)] blur-xl"></div>
+            <div className="absolute bottom-0 top-2 w-full bg-[linear-gradient(to_right,#F87BFF,#FB92CF,#FFDD9B,#C2F0B1,#2FD8FE)] blur-xl"></div>
             <Image
-              className="hidden dark:block relative"
+              className="relative hidden dark:block"
               src={DarkLogo}
               alt="dark-mode-image"
               width={40}
               height={40}
             />
             <Image
-              className=" block dark:hidden relative"
+              className="relative block dark:hidden"
               src={Logo}
               alt="light-mode-image"
               width={40}
@@ -187,31 +187,28 @@ export function Header() {
           </div>
         </Link>
         <div className="flex items-center gap-4">
-          <div className="border border-opacity-30 h-10 w-10 rounded-full flex items-center justify-center hover:bg-white hover:bg-opacity-10 hover:border-opacity-40 dark:hover:bg-black dark:hover:bg-opacity-10 dark:hover:border-opacity-40 sm:hidden">
-            {" "}
+          <div className="flex h-10 w-10 items-center justify-center rounded-full border border-opacity-30 hover:border-opacity-40 hover:bg-white hover:bg-opacity-10 dark:hover:border-opacity-40 dark:hover:bg-black dark:hover:bg-opacity-10 sm:hidden">
+            {' '}
             <MenuIconDropdown isLoggedIn={isLoggedIn} />
           </div>
 
-          <div
-            className="lg:hidden md:hidden
-      "
-          >
+          <div className="md:hidden lg:hidden">
             <ModeToggle />
           </div>
         </div>
 
-        <div className="sm:flex items-center gap-4 hidden">
-          <nav className="flex gap-6 items-center">
+        <div className="hidden items-center gap-4 sm:flex">
+          <nav className="flex items-center gap-6">
             {isLoggedIn && (
               <>
                 <Link
-                  className="hover:text-opacity-100 transition text-opacity-60 text-black dark:text-white dark:text-opacity-60 dark:hover:text-opacity-100"
+                  className="text-black text-opacity-60 transition hover:text-opacity-100 dark:text-white dark:text-opacity-60 dark:hover:text-opacity-100"
                   href="/your-rooms"
                 >
                   Your Rooms
                 </Link>
                 <Link
-                  className="hover:text-opacity-100 text-opacity-60 transition text-black dark:text-white dark:text-opacity-60 dark:hover:text-opacity-100"
+                  className="text-black text-opacity-60 transition hover:text-opacity-100 dark:text-white dark:text-opacity-60 dark:hover:text-opacity-100"
                   href="/dashboard"
                 >
                   Dashboard
@@ -219,7 +216,7 @@ export function Header() {
               </>
             )}
             <Link
-              className="hover:text-opacity-100 text-opacity-60 transition text-black dark:text-white dark:text-opacity-60 dark:hover:text-opacity-100"
+              className="text-black text-opacity-60 transition hover:text-opacity-100 dark:text-white dark:text-opacity-60 dark:hover:text-opacity-100"
               href="/about"
             >
               About
@@ -228,8 +225,8 @@ export function Header() {
           {isLoggedIn && <AccountDropdown />}
           {!isLoggedIn && (
             <Button
-              className="bg-white py-2 px-4 rounded-lg dark:text-black"
-              onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
+              className="rounded-lg bg-white px-4 py-2 dark:text-black"
+              onClick={() => signIn('google', { callbackUrl: '/dashboard' })}
               variant="link"
             >
               <LogInIcon className="mr-2" /> Sign In
@@ -239,5 +236,5 @@ export function Header() {
         </div>
       </div>
     </header>
-  );
+  )
 }
