@@ -1,6 +1,7 @@
 'use client'
 import { MinusIcon, PlusIcon } from 'lucide-react'
 import React, { useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import clsx from 'clsx'
 
 type Props = {}
@@ -38,11 +39,29 @@ const AccordionItem = ({
           <PlusIcon className="h-5 w-5" />
         )}
       </div>
-      {isOpen && (
-        <p className={clsx('mt-4', { hidden: !isOpen, '': isOpen === true })}>
-          {answer}
-        </p>
-      )}
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            initial={{
+              opacity: 0,
+              height: 0,
+              marginTop: 0,
+            }}
+            animate={{
+              marginTop: '16px',
+              height: 'auto',
+              opacity: 1,
+            }}
+            exit={{
+              marginTop: 0,
+              height: 0,
+              opacity: 0,
+            }}
+          >
+            {answer}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }

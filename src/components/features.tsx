@@ -6,6 +6,7 @@ import {
   SquareTerminal,
 } from 'lucide-react'
 import React from 'react'
+import Feature from './Feature'
 
 const features = [
   {
@@ -57,16 +58,12 @@ function Features() {
               }: { title: string; description: string; icon: React.ReactNode },
               index: number,
             ) => (
-              <div
-                key={index}
-                className="rounded-xl border border-white/30 px-5 py-10 text-center sm:flex-1"
-              >
-                <span className="mx-auto inline-flex h-14 w-14 items-center justify-center rounded-lg border border-white/30 bg-white p-2 text-black">
-                  {icon}
-                </span>
-                <h3 className="mt-6 text-lg font-bold">{title}</h3>
-                <p className="mt-2 text-sm text-white/70">{description}</p>
-              </div>
+              <Feature
+                title={title}
+                description={description}
+                icon={icon}
+                index={index}
+              />
             ),
           )}
         </div>
