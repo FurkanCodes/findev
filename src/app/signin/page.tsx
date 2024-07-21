@@ -28,7 +28,7 @@ export default function SignIn() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-purple-50 to-white px-4 py-12 dark:from-black dark:to-[#1a1a1a] sm:px-6 lg:px-8">
+    <div className="flex min-h-screen justify-center bg-gradient-to-b from-purple-50 to-white px-4 py-12 dark:from-black dark:to-[#1a1a1a] sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-purple-900 dark:text-white">
