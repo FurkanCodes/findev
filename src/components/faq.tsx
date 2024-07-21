@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import clsx from 'clsx'
 
 type Props = {}
+
 const items = [
   {
     question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
@@ -28,15 +29,17 @@ const AccordionItem = ({
   const [isOpen, setIsOpen] = useState(false)
   return (
     <div
-      className="cursor-pointer border-b border-white/[0.1] py-7 dark:border-white/[0.2]"
+      className="cursor-pointer border-b border-purple-200 py-7 dark:border-white/[0.2]"
       onClick={() => setIsOpen(!isOpen)}
     >
       <div className="flex items-center">
-        <span className="flex-1 text-base font-bold">{question} </span>
+        <span className="flex-1 text-base font-bold text-purple-900 dark:text-white">
+          {question}
+        </span>
         {isOpen ? (
-          <MinusIcon className="h-5 w-5" />
+          <MinusIcon className="h-5 w-5 text-purple-600 dark:text-white" />
         ) : (
-          <PlusIcon className="h-5 w-5" />
+          <PlusIcon className="h-5 w-5 text-purple-600 dark:text-white" />
         )}
       </div>
       <AnimatePresence initial={false}>
@@ -57,6 +60,7 @@ const AccordionItem = ({
               height: 0,
               opacity: 0,
             }}
+            className="text-purple-700 dark:text-white/70"
           >
             {answer}
           </motion.div>
@@ -68,7 +72,7 @@ const AccordionItem = ({
 
 const Faq = (props: Props) => {
   return (
-    <div className="bg-black bg-gradient-to-b from-[#5D2CA8] to-black pb-20 text-white">
+    <div className="bg-gradient-to-b from-purple-100 to-white pb-20 text-purple-900 dark:from-[#5D2CA8] dark:to-black dark:text-white">
       <div className="container sm:py-24">
         <h2 className="text-center text-5xl font-bold tracking-tighter sm:text-6xl">
           Frequently Asked Questions

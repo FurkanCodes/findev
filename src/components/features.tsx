@@ -38,13 +38,13 @@ const features = [
 
 function Features() {
   return (
-    <div className="bg-black py-[72px] text-white">
+    <div className="bg-purple-50 py-[72px] text-purple-900 dark:bg-black dark:text-white">
       <div className="container">
         <h2 className="text-center text-5xl font-bold tracking-tighter sm:text-6xl">
-          Everthing you need
+          Everything you need
         </h2>
         <div className="mx-auto max-w-xl">
-          <p className="mt-5 text-center text-xl text-white/70 sm:text-2xl">
+          <p className="mt-5 text-center text-xl text-purple-700 dark:text-white/70 sm:text-2xl">
             Findev is a place where you can find developers to code with.
           </p>
         </div>
@@ -59,6 +59,7 @@ function Features() {
               index: number,
             ) => (
               <Feature
+                key={index}
                 title={title}
                 description={description}
                 icon={icon}
