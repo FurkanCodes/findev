@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
+import { signIn } from 'next-auth/react'
+
 type Props = { session: any | null }
 
 function Hero({ session }: Props) {
@@ -49,8 +51,9 @@ function Hero({ session }: Props) {
         </p>
         <div className="z-10 mt-8 flex justify-center">
           <Link
+            href={''}
             className="group relative inline-block px-8 py-4 font-medium"
-            href={'/api/auth/signin'}
+            onClick={() => signIn('google')}
           >
             <span className="absolute inset-0 h-full w-full translate-x-1 translate-y-1 transform bg-purple-800 transition duration-200 ease-out group-hover:-translate-x-0 group-hover:-translate-y-0 dark:bg-black"></span>
             <span className="absolute inset-0 h-full w-full border-2 border-purple-800 bg-white group-hover:bg-purple-800 dark:border-black dark:group-hover:bg-black"></span>
