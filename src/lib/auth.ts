@@ -1,21 +1,24 @@
-import { db } from "@/db";
-import { DrizzleAdapter } from "@auth/drizzle-adapter";
-import { AuthOptions, DefaultSession, getServerSession } from "next-auth";
-import { Adapter } from "next-auth/adapters";
-import GoogleProvider from "next-auth/providers/google";
+import { db } from '@/db'
+import { DrizzleAdapter } from '@auth/drizzle-adapter'
+import { AuthOptions, DefaultSession, getServerSession } from 'next-auth'
+import { Adapter } from 'next-auth/adapters'
+import GoogleProvider from 'next-auth/providers/google'
 
-declare module "next-auth" {
+declare module 'next-auth' {
   interface Session extends DefaultSession {
     user: {
-      id: string;
-    } & DefaultSession["user"];
+      id: string
+    } & DefaultSession['user']
   }
 }
 
 export const authConfig = {
   adapter: DrizzleAdapter(db) as Adapter,
+  pages: {
+    signIn: '/signin',
+  },
   session: {
-    strategy: "jwt",
+    strategy: 'jwt',
   },
   providers: [
     GoogleProvider({
@@ -27,10 +30,10 @@ export const authConfig = {
     async jwt({ token, user }) {
       const dbUser = await db.query.users.findFirst({
         where: (users, { eq }) => eq(users.email, token.email!),
-      });
+      })
 
       if (!dbUser) {
-        throw new Error("no user with email found");
+        throw new Error('no user with email found')
       }
 
       return {
@@ -38,7 +41,7 @@ export const authConfig = {
         name: dbUser.name,
         email: dbUser.email,
         picture: dbUser.image,
-      };
+      }
     },
     async session({ token, session }) {
       if (token) {
@@ -47,14 +50,14 @@ export const authConfig = {
           name: token.name,
           email: token.email,
           image: token.picture,
-        };
+        }
       }
-      console.log("session", session);
-      return session;
+      console.log('session', session)
+      return session
     },
   },
-} satisfies AuthOptions;
+} satisfies AuthOptions
 
 export function getSession() {
-  return getServerSession(authConfig);
+  return getServerSession(authConfig)
 }
