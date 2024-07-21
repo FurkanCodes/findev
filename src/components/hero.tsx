@@ -1,12 +1,17 @@
+'use client'
 import React from 'react'
 import { CardContainer, CardBody, CardItem } from './ui/3d-card'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
-import { Button } from './ui/button'
+import { useRouter } from 'next/navigation'
 
-type Props = {}
+type Props = { session: any | null }
 
-function Hero({}: Props) {
+function Hero({ session }: Props) {
+  const router = useRouter()
+  const isLoggedIn = session?.user ? true : false
+  console.log(session)
+  if (isLoggedIn) router.push('/dashboard')
   return (
     <div className="relative overflow-clip bg-gradient-to-b from-purple-50 via-purple-100 to-purple-200 py-32 dark:bg-[linear-gradient(to_bottom,#000000,#200D42_34%,#4F21A1_65%,#A46EDB_82%)]">
       <div className="absolute left-1/2 h-[375px] w-[750px] -translate-x-1/2 -translate-y-1 rotate-45 rounded-[100%] border border-purple-300 bg-purple-100 bg-[radial-gradient(closest-side,#f3e8ff_82%,#d8b4fe)] blur-xl dark:border-[#B48CDE] dark:bg-black dark:bg-[radial-gradient(closest-side,#000_82%,#9560EB)]"></div>

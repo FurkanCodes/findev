@@ -5,16 +5,13 @@ import Features from '@/components/features'
 
 import Hero from '@/components/hero'
 import ProductShowcase from '@/components/product-showcase'
-import { CardContainer, CardBody, CardItem } from '@/components/ui/3d-card'
-import { db } from '@/db'
-import { signIn } from 'next-auth/react'
-import Image from 'next/image'
+import { getSession } from '@/lib/auth'
 
 export default async function Home() {
-  const rooms = await db.query.room.findMany()
+  const session = await getSession()
   return (
     <main>
-      <Hero />
+      <Hero session={session} />
       <Features />
       <ProductShowcase />
       <Faq />
