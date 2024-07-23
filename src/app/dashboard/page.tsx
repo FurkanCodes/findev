@@ -13,6 +13,7 @@ const Dashboard = async ({
 }) => {
   unstable_noStore()
   const rooms = await getRooms(searchParams.search)
+
   return (
     <main className="container mx-auto px-4 py-8 sm:px-6 md:px-8 lg:px-24 lg:py-12">
       <div className="mb-8 mt-8 flex items-center justify-between lg:mt-2">
