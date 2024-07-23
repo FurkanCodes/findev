@@ -1,9 +1,9 @@
-"use client";
+'use client'
 
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { Button } from "../../../components/ui/button";
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { Button } from '../../../components/ui/button'
 import {
   Form,
   FormControl,
@@ -12,46 +12,52 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../../../components/ui/form";
-import { Input } from "../../../components/ui/input";
-import { editRoomAction } from "./actions";
-import { useParams, useRouter } from "next/navigation";
-import { useToast } from "../../../components/ui/use-toast";
-import React from "react";
-import { Room } from "@/db/schema";
+} from '../../../components/ui/form'
+import { Input } from '../../../components/ui/input'
+import { editRoomAction } from './actions'
+import { useParams, useRouter } from 'next/navigation'
+import { useToast } from '../../../components/ui/use-toast'
+import React from 'react'
+import { Room } from '@/db/schema'
 
 const formSchema = z.object({
   name: z.string().min(1).max(50),
   description: z.string().min(1).max(250),
   githubRepo: z.string().min(1).max(50),
   tags: z.string().min(1).max(50),
-});
+  password: z.string().min(1).max(50).optional(),
+})
 
 export function EditRoomForm({ room }: { room: Room }) {
-  const router = useRouter();
-  const { toast } = useToast();
-  const params = useParams();
+  const router = useRouter()
+  const { toast } = useToast()
+  const params = useParams()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: room?.name || "",
-      description: room?.description || "",
-      githubRepo: room?.githubRepo || "",
-      tags: room?.tags || "",
+      name: room?.name || '',
+      description: room?.description || '',
+      githubRepo: room?.githubRepo || '',
+      tags: room?.tags || '',
     },
-  });
-
+  })
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const room = await editRoomAction({
-      id: params.roomId as string,
+    //TODO: after room password is set, it should be rehased
+    const adjustedValues = {
       ...values,
-    });
+      password: values.password || room.password,
+    }
+    console.log('adjustedValues', adjustedValues)
+    const updatedRoom = await editRoomAction({
+      id: params.roomId as string,
+      ...adjustedValues,
+    })
     toast({
-      title: "room updated",
-      description: "Your room has been updated",
-    });
-    router.push(`/your-rooms`);
+      title: 'room updated',
+      description: 'Your room has been updated',
+    })
+    router.push(`/your-rooms`)
   }
 
   return (
@@ -127,8 +133,23 @@ export function EditRoomForm({ room }: { room: Room }) {
           )}
         />
 
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Password</FormLabel>
+              <FormControl>
+                <Input {...field} placeholder="typescript, nextjs, tailwind" />
+              </FormControl>
+              <FormDescription>Password</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <Button type="submit">Submit</Button>
       </form>
     </Form>
-  );
+  )
 }

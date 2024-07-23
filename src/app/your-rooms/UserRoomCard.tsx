@@ -1,5 +1,5 @@
-"use client";
-import { Button } from "@/components/ui/button";
+'use client'
+import { Button } from '@/components/ui/button'
 import {
   Card,
   CardContent,
@@ -7,7 +7,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from '@/components/ui/card'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -18,30 +18,31 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+} from '@/components/ui/alert-dialog'
 
-import TagList from "@/components/ui/tag-list";
-import { Room } from "@/db/schema";
-import { parseTags } from "@/utils/util";
-import { GitHubLogoIcon, Pencil1Icon } from "@radix-ui/react-icons";
-import { TrashIcon } from "@radix-ui/react-icons";
-import Link from "next/link";
-import { deleteRoom } from "./actions";
+import TagList from '@/components/ui/tag-list'
+import { Room } from '@/db/schema'
+import { parseTags } from '@/utils/util'
+import { GitHubLogoIcon, Pencil1Icon } from '@radix-ui/react-icons'
+import { TrashIcon } from '@radix-ui/react-icons'
+import Link from 'next/link'
+import { deleteRoom } from './actions'
+import { toast } from '@/components/ui/use-toast'
 
-type Props = {};
+type Props = {}
 
 const UserRoomCard = ({ room }: { room: Room }) => {
   return (
     <Card>
       <CardHeader className="relative">
         <Button
-          size={"icon"}
-          className="absolute top-1 right-1"
+          size={'icon'}
+          className="absolute right-1 top-1"
           onClick={() => {}}
           asChild
         >
           <Link href={`/edit-room/${room.id}`}>
-            {" "}
+            {' '}
             <Pencil1Icon />
           </Link>
         </Button>
@@ -70,7 +71,7 @@ const UserRoomCard = ({ room }: { room: Room }) => {
           <AlertDialogTrigger asChild>
             <Button
               className="gap-2"
-              variant={"destructive"}
+              variant={'destructive'}
               onClick={() => {}}
             >
               <TrashIcon />
@@ -89,7 +90,11 @@ const UserRoomCard = ({ room }: { room: Room }) => {
               <AlertDialogCancel>Cancel</AlertDialogCancel>
               <AlertDialogAction
                 onClick={() => {
-                  deleteRoom(room.id);
+                  deleteRoom(room.id)
+                  toast({
+                    title: 'Room deleted',
+                    description: 'Your room has been deleted',
+                  })
                 }}
               >
                 Yes, Delete
@@ -99,7 +104,7 @@ const UserRoomCard = ({ room }: { room: Room }) => {
         </AlertDialog>
       </CardFooter>
     </Card>
-  );
-};
+  )
+}
 
-export default UserRoomCard;
+export default UserRoomCard
