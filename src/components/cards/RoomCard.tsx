@@ -83,9 +83,15 @@ const RoomCard = ({ room }: { room: Room }) => {
 
   return (
     <Card>
-      <CardHeader>
+      <CardHeader className="relative">
         <CardTitle>{room.name}</CardTitle>
         <CardDescription>{room.description}</CardDescription>
+        {room.password ? (
+          <div className="absolute right-1 top-1 mr-[-10px] border-l-4 border-red-500 bg-red-700 px-2 py-1">
+            <LockClosedIcon></LockClosedIcon>
+            {/* <span>Password Protected</span> */}
+          </div>
+        ) : null}
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
         {room.githubRepo ? (
@@ -98,12 +104,7 @@ const RoomCard = ({ room }: { room: Room }) => {
             <GitHubLogoIcon></GitHubLogoIcon>Github Repo Link
           </Link>
         ) : null}
-        {room.password ? (
-          <div className="flex items-center gap-2 border-l-4 border-red-500 bg-red-700 px-2 py-1">
-            <LockClosedIcon></LockClosedIcon>
-            <span>Password Protected</span>
-          </div>
-        ) : null}
+
         <TagList tags={parseTags(room?.tags)} />
       </CardContent>
       <CardFooter>
