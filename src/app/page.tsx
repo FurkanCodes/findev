@@ -10,7 +10,7 @@ import { getSession } from '@/lib/auth'
 export default async function Home() {
   const session = await getSession()
   return (
-    <main>
+    <main >
       <Hero session={session} />
       <Features />
       <ProductShowcase />

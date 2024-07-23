@@ -34,7 +34,7 @@ export default function RootLayout({
           >
             <NextTopLoader />
             <Header />
-            <div className=" ">{children}</div>
+            <div >{children}</div>
 
             <Toaster />
           </ThemeProvider>

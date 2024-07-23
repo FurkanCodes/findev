@@ -1,6 +1,6 @@
-"use client";
-import { Room } from "@/db/schema";
-import "@stream-io/video-react-sdk/dist/css/styles.css";
+'use client'
+import { Room } from '@/db/schema'
+import '@stream-io/video-react-sdk/dist/css/styles.css'
 import {
   Call,
   CallControls,
@@ -10,25 +10,25 @@ import {
   StreamTheme,
   StreamVideo,
   StreamVideoClient,
-} from "@stream-io/video-react-sdk";
-import { useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
-import { generateToken } from "./action";
-import { useRouter } from "next/navigation";
+} from '@stream-io/video-react-sdk'
+import { useSession } from 'next-auth/react'
+import { useEffect, useState } from 'react'
+import { generateToken } from './action'
+import { useRouter } from 'next/navigation'
 
-const apiKey = process.env.NEXT_PUBLIC_STREAM_API_KEY!;
+const apiKey = process.env.NEXT_PUBLIC_STREAM_API_KEY!
 
 export const DevVideoPlayer = ({ room }: { room: Room }) => {
-  const session = useSession();
-  const [client, setClient] = useState<StreamVideoClient | null>(null);
-  const [call, setCall] = useState<Call | null>(null);
-  const router = useRouter();
+  const session = useSession()
+  const [client, setClient] = useState<StreamVideoClient | null>(null)
+  const [call, setCall] = useState<Call | null>(null)
+  const router = useRouter()
   useEffect(() => {
     if (!session.data || !room) {
-      return;
+      return
     }
 
-    const userId = session.data.user?.id;
+    const userId = session.data.user?.id
     const client = new StreamVideoClient({
       apiKey,
       user: {
@@ -38,26 +38,26 @@ export const DevVideoPlayer = ({ room }: { room: Room }) => {
       },
 
       tokenProvider: () => generateToken(),
-    });
+    })
 
-    setClient(client);
+    setClient(client)
 
-    const call = client.call("default", room.id);
-    call.join({ create: true });
-    setCall(call);
+    const call = client.call('default', room.id)
+    call.join({ create: true })
+    setCall(call)
 
     return () => {
       call
         ?.leave()
         .then(() => {
-          client?.disconnectUser();
+          client?.disconnectUser()
         })
-        .catch(console.error);
-    };
-  }, [session.data, room]);
+        .catch(console.error)
+    }
+  }, [session.data, room])
 
   if (!client || !call) {
-    return null;
+    return null
   }
 
   return (
@@ -66,17 +66,17 @@ export const DevVideoPlayer = ({ room }: { room: Room }) => {
         <StreamCall call={call}>
           <CallParticipantsList
             onClose={function (): void {
-              undefined;
+              undefined
             }}
           />
           <SpeakerLayout />
           <CallControls
             onLeave={() => {
-              router.push("/dashboard");
+              router.push('/dashboard')
             }}
           />
         </StreamCall>
       </StreamTheme>
     </StreamVideo>
-  );
-};
+  )
+}
