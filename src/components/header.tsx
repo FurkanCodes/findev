@@ -165,7 +165,7 @@ export function Header() {
   const isLoggedIn = !!session.data
 
   return (
-    <header className="relative z-10 bg-gray-100 py-2 dark:bg-black">
+    <header className="sticky top-0 z-10 mx-auto rounded-lg border bg-gray-100 bg-white/20 py-2 backdrop-blur-xl dark:border-none dark:bg-black dark:bg-black/30">
       <div className="container mx-auto flex items-center justify-between">
         <Link href="/">
           <div className="relative">
