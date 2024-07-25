@@ -5,6 +5,7 @@ import { GitHubLogoIcon } from '@radix-ui/react-icons'
 import Link from 'next/link'
 import { DevVideoPlayer } from './video-player'
 import { unstable_noStore } from 'next/cache'
+import ChatRoom from './chat'
 
 async function RoomPage(props: { params: { roomId: string } }) {
   unstable_noStore()
@@ -43,6 +44,7 @@ async function RoomPage(props: { params: { roomId: string } }) {
             </p>
             <TagList tags={parseTags(room?.tags)} />
           </div>
+          <ChatRoom roomId={roomId} />
         </div>
       </div>
     </div>

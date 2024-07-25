@@ -1,12 +1,3 @@
-import postgres from 'postgres'
-import { drizzle } from 'drizzle-orm/postgres-js'
-import type { AdapterAccount } from 'next-auth/adapters'
-
-export const testing = pgTable('testing', {
-  id: text('id').notNull().primaryKey(),
-  name: text('name'),
-})
-
 import {
   boolean,
   timestamp,
@@ -16,7 +7,15 @@ import {
   integer,
   uuid,
 } from 'drizzle-orm/pg-core'
+import postgres from 'postgres'
+import { drizzle } from 'drizzle-orm/postgres-js'
+import type { AdapterAccount } from 'next-auth/adapters'
 import { sql } from 'drizzle-orm'
+
+const connectionString = 'postgres://postgres:postgres@localhost:5432/drizzle'
+const pool = postgres(connectionString, { max: 1 })
+
+export const db = drizzle(pool)
 
 export const users = pgTable('user', {
   id: text('id')
@@ -88,11 +87,11 @@ export const authenticators = pgTable(
     credentialBackedUp: boolean('credentialBackedUp').notNull(),
     transports: text('transports'),
   },
-  // authenticator => ({
-  //   compositePK: primaryKey({
-  //     columns: [authenticator.userId, authenticator.credentialID],
-  //   }),
-  // }),
+  authenticator => ({
+    compositePK: primaryKey({
+      columns: [authenticator.userId, authenticator.credentialID],
+    }),
+  }),
 )
 
 export const room = pgTable('room', {
